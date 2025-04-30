@@ -5,6 +5,8 @@ services:
     image: nginx
     deploy:
       replicas: 8
+      placement:
+        constraints: [node.role == worker or node.role == manager]
     ports:
       - "8000:80"
   visualizer:
@@ -15,3 +17,5 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock"
     deploy:
       replicas: 2
+      placement:
+        constraints: [node.role == worker or node.role == manager]
